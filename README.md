@@ -1,6 +1,6 @@
 # Projects
 I want to introduce you several projects as result of my homeschooling. Go easy on me :stuck_out_tongue_winking_eye:
-![Like me](Dog.gif)
+![](http://giphygifs.s3.amazonaws.com/media/eYilisUwipOEM/giphy.gif)
 
 ## INSTALLATION
 You can download this repository to check my works.
