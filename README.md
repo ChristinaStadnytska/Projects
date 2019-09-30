@@ -1,7 +1,7 @@
 # Projects
 I want to introduce you several projects as result of my homeschooling. Go easy on me :stuck_out_tongue_winking_eye:
 <div align="center">
-   <img src="http://giphygifs.s3.amazonaws.com/media/eYilisUwipOEM/giphy.gif" width="300" height="200" style="border:2px solild"/>
+   <img src="http://giphygifs.s3.amazonaws.com/media/eYilisUwipOEM/giphy.gif" width="300" height="200" style="border:10px solild #CCC"/>
 </div>
 
 ## INSTALLATION
