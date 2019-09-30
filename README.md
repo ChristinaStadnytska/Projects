@@ -1,6 +1,6 @@
 # Projects
-I want to introduce you several projects as result of my homeschooling. Go easy on me
-![](Dog.gif)
+I want to introduce you several projects as result of my homeschooling. Go easy on me :stuck_out_tongue_winking_eye:
+![Like me](Dog.gif)
 
 ## INSTALLATION
 You can download this repository to check my works.
@@ -16,38 +16,34 @@ Please make sure the release file is unpacked. You shall see the following files
 | **README** | this file |
 
 ## DESCRIPTION
-- ul Flo
+- Flo
    --------------------------------------------------------------------------------------------------------------------------
-  | :droplet:                                                                                                                |
-  | It's my result of Core Graphics [raywenderlich.com](https://www.raywenderlich.com/411-core-graphics-tutorial-part-1-getting-started) tutorial.                                                                                                   |
-  | It makes it easy to track how much water you drink. You can add each your glass of water and see a graph of              |
-  | your previous seven days’ consumption.                                                                                   |
+   :droplet:                                                                                                       
+   It's my result of Core Graphics [raywenderlich.com](https://www.raywenderlich.com/411-core-graphics-tutorial-part-1-getting-started) tutorial. It makes it easy to track how much water you drink. You can add each your glass of water and see a graph of your previous seven days’ consumption.
    --------------------------------------------------------------------------------------------------------------------------
 
-- ul NewsApp
+- NewsApp
    --------------------------------------------------------------------------------------------------------------------------
-  | :newspaper:                                                                                                              |
-  | If you like to stay informed, you can use this app. There are several opportunities such as viewing table of news,       |
-  | searching for specific news and sorting it.                                                                              |
+   :newspaper:                                                                                                              
+   If you like to stay informed, you can use this app. There are several opportunities such as viewing table of news, searching for specific news and sorting it.                                                                              
    --------------------------------------------------------------------------------------------------------------------------
 
-- ul SalaryApp
+- SalaryApp
    --------------------------------------------------------------------------------------------------------------------------
-  | :dollar:                                                                                                                 |
-  | It is simple app to calculate your salary. It is possible to include a tax too.                                          |
+   :dollar:                                                                                                                
+   It is simple app to calculate your salary. It is possible to include a tax too.                                          
    --------------------------------------------------------------------------------------------------------------------------
   
-- ul Wallpaper App (in developing)
+- Wallpaper App (in developing)
    --------------------------------------------------------------------------------------------------------------------------
-  | :stuck_out_tongue_winking_eye:                                                                                           |
-  | You can use this app if you wish to make your gadgets more attractive or just to find some beautiful image.              |
-  | The options are to find picture by category and save it.                                                                 |
+   :sunrise_over_mountains:                                                                                           
+   You can use this app if you wish to make your gadgets more attractive or just to find some beautiful image. The options are to find picture by category and save it.                                                           
    --------------------------------------------------------------------------------------------------------------------------
 
-- ul ConsoleGame
+- ConsoleGame
    --------------------------------------------------------------------------------------------------------------------------
-  | :trophy:                                                                                                                 |
-  | You can move a person by code in the room. Just get to the box and win a trophy!                                         |
+   :trophy:                                                                                                                 
+   You can move a person by code in the room. Just get to the box and win a trophy!                                         
    --------------------------------------------------------------------------------------------------------------------------
    
 ## REQUIREMENTS
