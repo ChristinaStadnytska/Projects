@@ -56,5 +56,6 @@ class SortCountryViewController: UIViewController, UIPickerViewDelegate, UIPicke
     // MARK: - Delegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         UserDefaults.standard.set(countryArray[row], forKey: "country")
+        NotificationCenter.default.post(name: Notification.Name("loadData"), object: nil)
     }
 }

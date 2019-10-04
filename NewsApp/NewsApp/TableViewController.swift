@@ -16,50 +16,34 @@ class TableViewController: UITableViewController {
     var articlesList = [NewsAPI]()
     lazy var searchResult = [NewsAPI]()
     lazy var filteredArticlesArray = [NewsAPI]()
-    
-    let refresh = UIRefreshControl()
-    
+    let indexPath = IndexPath(row: 0, section: 0)
+        
     // For Pagination
     var currentPage = 1
     var pageSize = 6
     var isDataLoading = false
-
+    
     // Search Bar
-    @IBOutlet weak var searchBar: UISearchBar!
-    var searchBarActive = false
+    let searchBar = UISearchBar()
     
     // MARK: - Life cycle View
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loadData), name: Notification.Name("loadData"), object: nil)
 
         // Register cell for Table View
         let cell = UINib(nibName: "CustomTableViewCell", bundle: nil)
-        self.tableView.register(cell, forCellReuseIdentifier: "myCell")
-        
-        // Refresh configuration
-        self.refresh.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        self.refresh.tintColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-        self.tableView.addSubview(refresh)
-        
-        // Start point of SearchBar
-        self.tableView.setContentOffset(CGPoint.init(x: 0, y: self.searchBar.frame.height), animated: false)
-        self.tableView.tableHeaderView = self.searchBar
-        self.searchBar.delegate = self
+        tableView.register(cell, forCellReuseIdentifier: "myCell")
 
-        // Table View is not available while searching
-        if searchBarActive {
-            tableView.isUserInteractionEnabled = false
-        }
+        // SearchBar delegate
+        searchBar.delegate = self
+        getData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.articlesList.removeAll()
-        currentPage = 1
-
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        
+    // MARK: - Method for NotificationCenter
+    @objc func loadData() {
+        articlesList.removeAll()
         getData()
     }
     
@@ -80,7 +64,7 @@ class TableViewController: UITableViewController {
                     for item in items {
                         self.articlesList.append(NewsAPI(dictionary: item))
                     }
-                        
+
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
@@ -100,16 +84,14 @@ class TableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Pull-to-refresh
-    @objc func handleRefresh() {
-        articlesList.removeAll()
-        currentPage += 1
-        getData()
-        refresh.endRefreshing()
-    }
-    
-    // MARK: - Show alert with Sort
+    // MARK: - Sort method
     @IBAction func sortBarButtonItem(_ sender: UIBarButtonItem) {
+        self.currentPage = 1
+        self.tableView.scrollToRow(at: self.indexPath, at: .top, animated: true)
+        searchResult.removeAll()
+        navigationItem.titleView = nil
+        searchBar.text = nil
+        
         let alertController = UIAlertController()
         
         let category = UIAlertAction(title: "Sort by category", style: .default) { (action) in
@@ -133,7 +115,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchBarActive {
+        if !searchResult.isEmpty {
             return searchResult.count
         } else {
             return articlesList.count
@@ -144,7 +126,7 @@ class TableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! CustomTableViewCell
         
-        filteredArticlesArray = searchBarActive ? searchResult.sorted(by: { $0.publishedAt > $1.publishedAt }) : articlesList.sorted(by: { $0.publishedAt > $1.publishedAt })
+        filteredArticlesArray = !searchResult.isEmpty ? searchResult.sorted(by: { $0.publishedAt > $1.publishedAt }) : articlesList.sorted(by: { $0.publishedAt > $1.publishedAt })
 
         let article = filteredArticlesArray[indexPath.row]
         cell.sourceLabel.text = article.source.name
@@ -161,26 +143,26 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
-    
+
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let article = filteredArticlesArray[indexPath.row]
         showSafari(articleURL: article.url, with: indexPath.row)
-        self.searchBar.text = ""
     }
     
     // Pagination
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isDataLoading = false
-        self.currentPage += 1
+        tableView.tableFooterView = UIView()
     }
     
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let currentOffset = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-        
+
         if currentOffset > contentHeight - scrollView.frame.height {
             if !isDataLoading {
+                self.currentPage += 1
                 isDataLoading = true
                 getData()
             }
@@ -193,20 +175,15 @@ class TableViewController: UITableViewController {
 extension TableViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.searchBarActive = true
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.searchBarActive = false
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.searchBarActive = false
+        searchBar.becomeFirstResponder()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchBarActive = false
         searchBar.resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchResult.removeAll()
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -214,29 +191,15 @@ extension TableViewController: UISearchBarDelegate {
             return article.title.lowercased().contains(searchText.lowercased())
         })
         
-        if searchResult.isEmpty {
-            self.searchBarActive = false
-        } else {
-            self.searchBarActive = true
-        }
-        
         self.tableView.reloadData()
     }
     
     @IBAction func searchBarButtonItem(_ sender: UIBarButtonItem) {
-        
-        self.refresh.isUserInteractionEnabled = false
-
-        UIView.animate(withDuration: 0.6) {
-            if self.searchBar.isHidden == true {
-                self.searchBar.becomeFirstResponder()
-                self.searchBar.isHidden = false
-                self.tableView.setContentOffset(CGPoint(x: 0, y: -self.searchBar.frame.height * 2), animated: false)
+        UIView.animate(withDuration: 0.5) {
+            if self.navigationItem.titleView == nil {
+                self.navigationItem.titleView = self.searchBar
             } else {
-                self.searchBar.resignFirstResponder()
-                self.searchBar.isHidden = true
-                self.searchBar.text = ""
-                self.tableView.setContentOffset(CGPoint.init(x: 0, y: -self.searchBar.frame.height), animated: false)
+                self.navigationItem.titleView = nil
             }
         }
     }

@@ -22,7 +22,7 @@ class SortCategoryViewController: UIViewController, UIPickerViewDelegate, UIPick
     // MARK: - Life cycle View
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         categoryPickerView.delegate = self
         categoryPickerView.dataSource = self
         
@@ -30,7 +30,6 @@ class SortCategoryViewController: UIViewController, UIPickerViewDelegate, UIPick
         if let row = categoryArray.firstIndex(of: selected) {
             categoryPickerView.selectRow(row, inComponent: 0, animated: false)
         }
-        
     }
     
     // MARK: - Data Source
@@ -49,6 +48,7 @@ class SortCategoryViewController: UIViewController, UIPickerViewDelegate, UIPick
     // MARK: - Delegate
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         UserDefaults.standard.set(categoryArray[row], forKey: "category")
+        NotificationCenter.default.post(name: Notification.Name("loadData"), object: nil)
     }
 
 }

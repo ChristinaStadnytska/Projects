@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26C83626234747DB0092AE1E /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 26C83625234747DB0092AE1E /* icon.jpg */; };
 		6A359C2F233BA3B3007E1D10 /* SortCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A359C2E233BA3B3007E1D10 /* SortCategoryViewController.swift */; };
 		6A58582B233C4EE900033DE2 /* SortCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A58582A233C4EE900033DE2 /* SortCountryViewController.swift */; };
 		6A5C45A923376FB700092083 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5C45A823376FB700092083 /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26C83625234747DB0092AE1E /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = icon.jpg; path = ../../../../../Desktop/icon.jpg; sourceTree = "<group>"; };
 		6A359C2E233BA3B3007E1D10 /* SortCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCategoryViewController.swift; sourceTree = "<group>"; };
 		6A58582A233C4EE900033DE2 /* SortCountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCountryViewController.swift; sourceTree = "<group>"; };
 		6A5C45A523376FB700092083 /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +77,7 @@
 				6A5C45AF23376FB800092083 /* Assets.xcassets */,
 				6A5C45B123376FB800092083 /* LaunchScreen.storyboard */,
 				6A5C45B423376FB800092083 /* Info.plist */,
+				26C83625234747DB0092AE1E /* icon.jpg */,
 			);
 			path = NewsApp;
 			sourceTree = "<group>";
@@ -111,6 +114,7 @@
 				TargetAttributes = {
 					6A5C45A423376FB700092083 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -138,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A5C45B323376FB800092083 /* LaunchScreen.storyboard in Resources */,
+				26C83626234747DB0092AE1E /* icon.jpg in Resources */,
 				6A5C45B023376FB800092083 /* Assets.xcassets in Resources */,
 				6A5C45BF233773BF00092083 /* CustomTableViewCell.xib in Resources */,
 				6A5C45AE23376FB700092083 /* Main.storyboard in Resources */,
@@ -311,7 +316,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARC.NewsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -329,7 +334,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARC.NewsApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
