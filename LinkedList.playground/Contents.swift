@@ -11,13 +11,7 @@ class Node<T> {
 
 public class LinkedList<T> {
     var head: Node<T>?
-    var last: Node<T>? {
-        guard var node = head else { return nil }
-        while let next = node.next {
-            node = next
-        }
-        return node
-    }
+    var last: Node<T>?
     
     public var print: String {
         var string = ""
@@ -29,18 +23,7 @@ public class LinkedList<T> {
         string += "\(node.value)"
         return string
     }
-    
-    public var reversedPrint: String {
-        var string = ""
-        guard var node = last else { return "" }
-        while let previous = node.previous {
-            string += "\(node.value), "
-            node = previous
-        }
-        string += "\(node.value)"
-        return string
-    }
-    
+
     public func append(value: T) {
         let newNode = Node(value: value)
         if let lastNode = last {
@@ -49,21 +32,25 @@ public class LinkedList<T> {
         } else {
             head = newNode
         }
+        last = newNode
     }
     
-    private func node(atIndex index: Int) -> Node<T> {
-        if index == 0 {
-            return head!
-        } else {
-            var node = head?.next
-            for _ in 1..<index {
-                node = node?.next
-                if node == nil {break}
+    private func node(atIndex index: Int) -> Node<T>? {
+        var node = head
+        var i = index
+        while node != nil {
+            if i == 0 {
+                return node
+            } else if index > 0 {
+                i -= 1
+            } else if index < 0 {
+                i += 1
             }
-            return node!
+            node = node?.next
         }
+        return node
     }
-    
+
     public func insert(atIndex index: Int, value: T) {
         let newNode = Node(value: value)
         if index == 0 {
@@ -72,17 +59,16 @@ public class LinkedList<T> {
             head = newNode
         } else {
             let previous = self.node(atIndex: index - 1)
-            let next = previous.next
-            
+            let next = previous?.next
+
             newNode.previous = previous
             newNode.next = next
-            
-            previous.next = newNode
+
+            previous?.next = newNode
             next?.previous = newNode
-            
         }
     }
-    
+
     private func remove(node: Node<T>) -> T {
         let previous = node.previous
         let next = node.next
@@ -92,16 +78,30 @@ public class LinkedList<T> {
             head = next
         }
         next?.previous = previous
-        
+
         node.previous = nil
         node.next = nil
-        
+
         return node.value
     }
-    
+
      public func removeAt(_ index: Int) -> T {
         let nodeToRemove = node(atIndex: index)
-        return remove(node: nodeToRemove)
+        return remove(node: nodeToRemove!)
+    }
+    
+     func reverse() -> Node<T>? {
+        var node = head
+        var prev: Node<T>?
+        var next: Node<T>?
+
+        while node != nil {
+            next = node?.next
+            node?.next = prev
+            prev = node
+            node = next
+        }
+        return prev
     }
 }
 
@@ -110,11 +110,17 @@ list.append(value: "a")
 list.append(value: "b")
 list.append(value: "c")
 list.append(value: "d")
-
 list.print
-list.insert(atIndex: 2, value: "v")
+
+list.insert(atIndex: -1, value: "y")
+list.print
+list.insert(atIndex: -2, value: "p")
+list.print
+list.insert(atIndex: -1, value: "o")
+list.print
+
 list.removeAt(1)
 list.print
-list.reversedPrint
-
+list.reverse()
+list.print
 
