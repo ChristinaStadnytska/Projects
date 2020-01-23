@@ -32,25 +32,12 @@ class ViewController: UIViewController {
         self.view.addSubview(containerView)
         
         // Draw logo
-        UIColor.white.setFill()
-        cPath.fill()
-        
-        UIColor.purple.setStroke()
-        cPath.lineWidth = 2
-        cPath.stroke()
-        
         let layer = CAShapeLayer()
         layer.path = cPath.cgPath
         
-        layer.strokeEnd = 0
         layer.lineWidth = 2
-        layer.borderColor = UIColor.red.cgColor
-        layer.shadowColor = UIColor.yellow.cgColor
-        layer.shadowRadius = 12
-        layer.shadowOpacity = 0.8
-        layer.shadowOffset = CGSize(width: 1, height: 1)
-        layer.strokeColor = UIColor.blue.cgColor
-        layer.fillColor = UIColor.white.cgColor
+        layer.strokeColor = UIColor.white.cgColor
+        layer.fillColor = UIColor.clear.cgColor
         
         containerView.layer.addSublayer(layer)
         
@@ -60,17 +47,15 @@ class ViewController: UIViewController {
     func makeLogo() {
 
         // cPath
-        cPath.move(to: CGPoint(x: 50, y: 30))
-        cPath.addCurve(to: CGPoint(x: 50, y: 80), controlPoint1: CGPoint(x: 30, y: 20), controlPoint2: CGPoint(x: 0, y: 50))
-//        path.addCurve(to: CGPoint(x: 74.1, y: 49.26), controlPoint1: CGPoint(x: 84.23, y: 46.96), controlPoint2: CGPoint(x: 79.37, y: 49.69))
-//        path.addCurve(to: CGPoint(x: 74, y: 47.52), controlPoint1: CGPoint(x: 74.03, y: 48.71), controlPoint2: CGPoint(x: 74, y: 48.13))
-//        path.addCurve(to: CGPoint(x: 79.3, y: 34.51), controlPoint1: CGPoint(x: 74, y: 43.1), controlPoint2: CGPoint(x: 75.91, y: 38.38))
-//        path.addCurve(to: CGPoint(x: 85.76, y: 29.63), controlPoint1: CGPoint(x: 80.99, y: 32.55), controlPoint2: CGPoint(x: 83.15, y: 30.93))
-//        path.addCurve(to: CGPoint(x: 93.15, y: 27.52), controlPoint1: CGPoint(x: 88.37, y: 28.35), controlPoint2: CGPoint(x: 90.83, y: 27.65))
-//        path.addCurve(to: CGPoint(x: 93.25, y: 29.36), controlPoint1: CGPoint(x: 93.22, y: 28.14), controlPoint2: CGPoint(x: 93.25, y: 28.75))
-//        path.addLine(to: CGPoint(x: 93.25, y: 29.36))
-
-        cPath.close()
+        cPath.move(to: CGPoint(x: 100, y: 25))
+        cPath.addCurve(to: CGPoint(x: 70, y: 20), controlPoint1: CGPoint(x: 97, y: 12), controlPoint2: CGPoint(x: 75, y: 15))
+        cPath.addCurve(to: CGPoint(x: 70, y: 93), controlPoint1: CGPoint(x: 52, y: 30), controlPoint2: CGPoint(x: 50, y: 80))
+        cPath.addCurve(to: CGPoint(x: 105, y: 80), controlPoint1: CGPoint(x: 84, y: 99), controlPoint2: CGPoint(x: 100, y: 87))
+        cPath.addLine(to: CGPoint(x: 108, y: 80))
+        
+        // aPath
+        aPath.move(to: CGPoint(x: 130, y: 65))
+        aPath.addCurve(to: CGPoint(x: 120, y: 65), controlPoint1: CGPoint(x: 127, y: 58), controlPoint2: CGPoint(x: 123, y: 58))
     }
 }
 
