@@ -23,7 +23,7 @@ class HomeScreen extends Component {
     return (
       <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
         <FlatList
-          data={recordsData.url.articles}
+          data={recordsData.articles}
           renderItem={({ item }) => (
             <ListItem
               title={null}

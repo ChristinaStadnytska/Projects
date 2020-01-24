@@ -5,10 +5,6 @@ import { setShowOverlay } from '../../../actions';
 import OverlayContent from '../overlayContent';
 
 class OverlayCustom extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Overlay
