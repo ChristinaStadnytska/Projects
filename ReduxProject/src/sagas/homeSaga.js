@@ -6,11 +6,15 @@ import {
   RECORDS_FAILED,
   GET_DATA_FROM_REALM,
   REALM_DATA,
+  DELETE_DATA_FROM_REALM,
+  SHOW_ACTIVITY_INDICATOR,
+  HIDE_ACTIVITY_INDICATOR,
 } from '../types';
 import realm from '../schemas/schema';
 import convertToArray from '../uitils/convertToArray';
 
 function* fetchRecordsAsync() {
+  yield put({ type: SHOW_ACTIVITY_INDICATOR });
   yield put({ type: RECORDS_REQUEST_IN_PROGRESS });
 
   const state = yield select();
@@ -43,19 +47,28 @@ function* fetchRecordsAsync() {
 
   } catch (e) {
     yield put({ type: RECORDS_FAILED });
+  } finally {
+    yield put({ type: HIDE_ACTIVITY_INDICATOR });
   }
 }
 
 function* getArticles() {
   const articles = yield realm.objects('Article');
-  
   yield put({
     type: REALM_DATA,
     payload: { articles: convertToArray(articles) },
   });
+
+}
+
+function* deleteArticle() {
+  yield realm.write(() => {
+    realm.deleteAll()
+  })
 }
 
 export default function* watchFetchRecords() {
   yield takeEvery(RECORDS_FETCH, fetchRecordsAsync);
   yield takeEvery(GET_DATA_FROM_REALM, getArticles);
+  yield takeEvery(DELETE_DATA_FROM_REALM, deleteArticle);
 }

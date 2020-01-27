@@ -3,7 +3,7 @@ import { Text, ButtonGroup, Button } from 'react-native-elements';
 import { View } from 'react-native';
 import Picker from 'react-native-picker-view';
 import { connect } from 'react-redux';
-import { setIndex, setIndexAndValueCountry, setIndexAndValueCategory, recordsFetch, setShowOverlay } from '../../../actions';
+import { setIndex, setIndexAndValueCountry, setIndexAndValueCategory, recordsFetch, setShowOverlay, deleteArticle } from '../../../actions';
 import styles from './styles';
 
 const firstButton = () => <Text>Country</Text>
@@ -13,6 +13,7 @@ class OverlayContent extends PureComponent {
 
   filterPress = () => {
     this.props.setShowOverlay();
+    this.props.deleteArticle();
     this.props.recordsFetch();
   };
 
@@ -65,6 +66,7 @@ const mapDispatchToProps = {
   setIndexAndValueCategory,
   recordsFetch,
   setShowOverlay,
+  deleteArticle,
 };
 
 const mapStateToProps = state => ({

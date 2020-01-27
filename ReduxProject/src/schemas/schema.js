@@ -15,8 +15,20 @@ const ArticleSchema = {
   }
 };
 
+const schemaVersion = 0;
 const realm = new Realm ({
   schema: [ArticleSchema],
+  schemaVersion,
+  migration: (oldRealm, newRealm) => {
+    if (oldRealm.schemaVersion < schemaVersion) {
+      const oldObjects = oldRealm.objects('Article');
+      const newObjects = newRealm.objects('Article');
+      
+      for (let i = 0; i < oldObjects.length; i++) {
+        newObjects[i] = {...oldObjects[i]};
+      }
+    }
+  }
 });
 
 export default realm;

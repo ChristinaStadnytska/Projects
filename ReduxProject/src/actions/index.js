@@ -6,6 +6,7 @@ import {
   SELECTED_INDEX,
   SELECTED_COUNTRY_PICKER,
   SELECTED_CATEGORY_PICKER,
+  DELETE_DATA_FROM_REALM,
 } from '../types';
 
 export const getText = (text) => ({
@@ -38,3 +39,7 @@ export const setIndexAndValueCategory = (indexCategory, valueCategory) => ({
   type: SELECTED_CATEGORY_PICKER,
   payload: {indexCategory, valueCategory},
 });
+
+export const deleteArticle = () => ({
+  type: DELETE_DATA_FROM_REALM,
+})

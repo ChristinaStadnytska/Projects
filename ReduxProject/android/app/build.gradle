@@ -184,8 +184,8 @@ dependencies {
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
-        debugImplementation files(hermesPath + "hermes-debug.aar")
-        releaseImplementation files(hermesPath + "hermes-release.aar")
+        debugcompile files(hermesPath + "hermes-debug.aar")
+        releasecompile files(hermesPath + "hermes-release.aar")
     } else {
         implementation jscFlavor
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, FlatList, Text } from 'react-native';
+import { SafeAreaView, FlatList, ActivityIndicator } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Moment from 'moment';
@@ -21,7 +21,7 @@ class HomeScreen extends Component {
   render() {
     const { navigation, recordsData } = this.props;
     return (
-      <SafeAreaView style={{backgroundColor: 'white', flex: 1}}>
+      <SafeAreaView style={{ backgroundColor: 'white', flex: 1, justifyContent: 'center' }}>
         <FlatList
           data={recordsData.articles}
           renderItem={({ item }) => (
@@ -30,11 +30,12 @@ class HomeScreen extends Component {
               subtitle={item.title}
               rightSubtitle={Moment(item.publishedAt).format('H:mma')}
               bottomDivider
-              onPress={() => navigation.navigate('detailScreen', {...item})}
+              onPress={() => navigation.navigate('detailScreen', { ...item })}
             />
           )}
           keyExtractor={(item, index) => index.toString()}
-          ListEmptyComponent={<Text style={styles.emptyFlatList}>Empty List</Text>}
+          ListEmptyComponent={<ActivityIndicator animating={recordsData.isBusy} size='small' color='#A9A9A9' style={styles.activityIndicator} />
+        }
         />
       </SafeAreaView>
     );
@@ -50,7 +51,6 @@ const mapDispatchToProps = {
 const mapStateToProps = state => ({
   textData: state.getTextReducer,
   recordsData: state.recordsFetchReducer,
-  // isClickedSearch: state.searchBarReducer,
 });
 
 export default connect(

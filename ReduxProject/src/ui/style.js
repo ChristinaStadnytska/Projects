@@ -42,10 +42,9 @@ const styles = StyleSheet.create({
         color: '#C0C0C0',
         fontSize: 14,
     },
-    emptyFlatList: {
+    activityIndicator: {
         alignSelf: 'center',
         marginTop: 30,
-        color: '#C0C0C0',
     },
 })
 
