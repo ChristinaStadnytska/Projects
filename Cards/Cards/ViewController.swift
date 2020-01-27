@@ -44,15 +44,22 @@ class ViewController: UIViewController {
             return layer
         }
         
-        // Add animation
-        layers.enumerated().forEach{ offset, layer in
-            let animation = CABasicAnimation(keyPath: "strokeEnd")
-            animation.fromValue = 0.0
-            animation.toValue = 1.0
-            animation.duration = 2.0
-            
-            layer.add(animation, forKey: "drawLineAnimation")
-        }
+         // Add animation
+               layers.enumerated().forEach{ offset, layer in
+                   let animation = CABasicAnimation(keyPath: "strokeEnd")
+                   animation.beginTime = 0.5 * CFTimeInterval(offset)
+                   animation.fromValue = 0.0
+                   animation.toValue = 1.0
+                   animation.duration = 0.5
+                   animation.fillMode = .forwards
+                   
+                   let group = CAAnimationGroup()
+                   group.animations = [animation]
+                   group.duration = CFTimeInterval(layers.count)
+                   group.fillMode = .forwards
+                   
+                   layer.add(group, forKey: "drawLineAnimation")
+               }
     }
     
     func makeLogo() {
