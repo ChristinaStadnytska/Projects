@@ -222,7 +222,7 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
-  - RealmJS (4.0.0-beta.0):
+  - RealmJS (4.0.0-beta.1):
     - GCDWebServer
     - React
   - RNCMaskedView (0.1.5):
@@ -378,13 +378,13 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
-  RealmJS: 5c997c5496704f0cb552595600b028bd1c30a6b7
+  RealmJS: a0d9e4ea107a1beedc2ead1737b6ead6d82705ea
   RNCMaskedView: c8b53164b85ecf94c9a44d67082df0f03c1f74cc
   RNGestureHandler: 02905abe54e1f6e59c081a10b4bd689721e17aa6
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: 6adf01eb4080f44af6cca551207c6b0505066857
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  SRSPickerView: d3dd50f4b3d8eb323aca5ab3dec705082cf413e7
+  SRSPickerView: 590ed8f99e3ef8783e46d124d9871a8938d51955
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
 PODFILE CHECKSUM: 42ecd341d9de54805235d37e8e1b999570416e90
