@@ -28,7 +28,8 @@ class ViewController: UIViewController {
         let origin = CGPoint(x: self.view.frame.origin.x, y: self.view.frame.origin.y + self.view.bounds.height / 3)
         let size = CGSize(width: self.view.bounds.width, height: self.view.frame.height / 8)
         let containerView = UIView(frame: CGRect(origin: origin, size: size))
-        containerView.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        containerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
         self.view.addSubview(containerView)
         
@@ -37,6 +38,7 @@ class ViewController: UIViewController {
         let layers = paths.map{ path -> CAShapeLayer in
             let layer = CAShapeLayer()
             layer.path = path.cgPath
+            layer.strokeEnd = 0
             layer.lineWidth = 2
             layer.strokeColor = UIColor.white.cgColor
             layer.fillColor = UIColor.clear.cgColor
@@ -47,18 +49,19 @@ class ViewController: UIViewController {
          // Add animation
                layers.enumerated().forEach{ offset, layer in
                    let animation = CABasicAnimation(keyPath: "strokeEnd")
-                   animation.beginTime = 0.5 * CFTimeInterval(offset)
+                   animation.beginTime = 0.3 * CFTimeInterval(offset)
                    animation.fromValue = 0.0
                    animation.toValue = 1.0
-                   animation.duration = 0.5
+                   animation.duration = 0.3
                    animation.fillMode = .forwards
                    
                    let group = CAAnimationGroup()
                    group.animations = [animation]
+                group.isRemovedOnCompletion = false
                    group.duration = CFTimeInterval(layers.count)
                    group.fillMode = .forwards
                    
-                   layer.add(group, forKey: "drawLineAnimation")
+                layer.add(group, forKey: "drawLineAnimation")
                }
     }
     
