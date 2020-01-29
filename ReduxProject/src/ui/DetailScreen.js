@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import { Text, Image } from 'react-native-elements';
+import { ScrollView } from 'react-native-gesture-handler';
 import Moment from 'moment';
 import styles from './style';
-import { ScrollView } from 'react-native-gesture-handler';
 
 class DetailScreen extends PureComponent {
 
@@ -12,7 +12,7 @@ class DetailScreen extends PureComponent {
     headerStyle: {
       shadowColor: '#C0C0C0',
       shadowOpacity: 0.2,
-      shadowOffset: {height: 0},
+      shadowOffset: { height: 0 },
       shadowRadius: 0,
       elevation: 5,
     },
@@ -30,7 +30,10 @@ class DetailScreen extends PureComponent {
           </View>
           <Image
             containerStyle={styles.image}
-            source={{ uri: urlToImage ? urlToImage : '' }} />
+            source={{
+              uri: urlToImage ? urlToImage : '',
+              cache: 'force-cache',
+            }} />
           <Text style={styles.description}>{description ? description : ''}</Text>
           <Text style={styles.author}>{author ? author : ''}</Text>
         </ScrollView>

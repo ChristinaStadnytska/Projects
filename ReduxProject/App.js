@@ -6,12 +6,17 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Screen from './src/ui';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen';
 import store from './src/configureStore';
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
     <Provider store={store}>
       <Screen />
