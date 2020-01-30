@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C549C8023E2D32E00BA6823 /* AnimatedUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C549C7F23E2D32E00BA6823 /* AnimatedUIView.swift */; };
 		264534C623D63AE600649881 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264534C523D63AE600649881 /* AppDelegate.swift */; };
 		264534C823D63AE600649881 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264534C723D63AE600649881 /* SceneDelegate.swift */; };
 		264534CA23D63AE600649881 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264534C923D63AE600649881 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C549C7F23E2D32E00BA6823 /* AnimatedUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedUIView.swift; sourceTree = "<group>"; };
 		264534C223D63AE600649881 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		264534C523D63AE600649881 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		264534C723D63AE600649881 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				264534C723D63AE600649881 /* SceneDelegate.swift */,
 				264534C923D63AE600649881 /* ViewController.swift */,
 				264534CB23D63AE600649881 /* Main.storyboard */,
+				0C549C7F23E2D32E00BA6823 /* AnimatedUIView.swift */,
 				264534CE23D63AE700649881 /* Assets.xcassets */,
 				264534D023D63AE700649881 /* LaunchScreen.storyboard */,
 				264534D323D63AE700649881 /* Info.plist */,
@@ -141,6 +144,7 @@
 				264534CA23D63AE600649881 /* ViewController.swift in Sources */,
 				264534C623D63AE600649881 /* AppDelegate.swift in Sources */,
 				264534C823D63AE600649881 /* SceneDelegate.swift in Sources */,
+				0C549C8023E2D32E00BA6823 /* AnimatedUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
