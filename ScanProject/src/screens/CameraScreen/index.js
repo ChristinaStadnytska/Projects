@@ -11,57 +11,38 @@ class CameraScreen extends Component {
       result: null,
       width: 0,
       height: 0,
-      timePassed: false,
       showMask: false,
       x: 0,
       y: 0,
     };
   }
 
-  showMask = (e) => {
-    this.setState({
-      width: e.bounds.size.width,
-      height: e.bounds.size.height,
-      x: e.bounds.origin.x,
-      y: e.bounds.origin.y,
-      showMask: true,
-    })
+  componentWillUnmount() {
+    clearTimeout(this.state.showMask, this.state.result, this.state.scan, this.state.ScanResult)
   }
 
   onSuccess = (e) => {
     const check = e.data.substring(0, 4);
     console.log('scanned data' + check);
-    // if (!showMask) {
-    //   this.setState({
-    //     result: e,
-    //     scan: false,
-    //     ScanResult: true,
-    //   })
-    //   if (check === 'http') {
-    //     Linking
-    //       .openURL(e.data)
-    //       .catch(err => console.error('An error occured', err));
-    //   }  
-    // }
-
-    // ------------- old version --------------
     this.setState({
-      result: e,
-      scan: false,
-      ScanResult: true,
-      showMask: false,
+      showMask: true,
+      width: e.bounds.size.width,
+      height: e.bounds.size.height,
+      x: e.bounds.origin.x,
+      y: e.bounds.origin.y,
     })
+    setTimeout(() => {
+      this.setState({
+        showMask: false,
+        scan: false, 
+        ScanResult: true, 
+        result: e
+      })
+    }, 500)
     if (check === 'http') {
       Linking
         .openURL(e.data)
         .catch(err => console.error('An error occured', err));
-    } else {
-      this.setState({
-        result: e,
-        scan: false,
-        ScanResult: true,
-        showMask: false,
-      })
     }
   }
 
@@ -101,41 +82,29 @@ class CameraScreen extends Component {
             <Text>Height:{height}</Text>
             <Text>X:{x}</Text>
             <Text>Y:{y}</Text>
-            <View style={{ width: parseInt(width), height: parseInt(height), backgroundColor: 'yellow' }}></View>
 
             <Button onPress={this.scanAgain} title="Click to Scan again!" />
           </View>
         }
 
         {showMask &&
-          // <QRCodeScanner
-          //   onRead={this.onSuccess}
-          //   reactivate={true}
-          //   showMarker={true}
-          //   fadeIn={false}
-          //   notAuthorizedView={<Text style={{ alignSelf: 'center' }}>Need camera permission. Go to settings please.</Text>}
-          //   ref={(node) => { this.scanner = node }}
-          //   bottomContent={
-          //     <View>
-          //       <Button
-          //         title="OK. Got it!"
-          //         onPress={() => this.scanner.reactivate()}
-          //       />
-          //       <Button
-          //         title="Stop Scan"
-          //         onPress={() => this.setState({ scan: false })}
-          //       />
-          //     </View>
-          //   }
-          // >
-            <View style={{ width: parseInt(width), height: parseInt(height), left: parseInt(x), top: parseInt(y) + parseInt(height) * 2, position: 'absolute', zIndex: 1000, backgroundColor: 'yellow' }}></View>
-            // setTimeout(() => { this.setState({ timePassed: true }) }, 2000)
-          // </QRCodeScanner>
+          <View
+            style={{
+              width: parseInt(width),
+              height: parseInt(height),
+              left: parseInt(x),
+              top: parseInt(y) + parseInt(y),
+              position: 'absolute',
+              zIndex: 1000,
+              backgroundColor: '#808080',
+              opacity: .4
+            }}>
+          </View>
         }
 
         {scan &&
           <QRCodeScanner
-            onRead={this.showMask}
+            onRead={this.onSuccess}
             reactivate={true}
             showMarker={true}
             fadeIn={false}

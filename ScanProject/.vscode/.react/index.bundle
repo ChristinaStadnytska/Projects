@@ -95601,37 +95601,30 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       (0, _classCallCheck2.default)(this, CameraScreen);
       _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(CameraScreen).call(this, props));
 
-      _this.showMask = function (e) {
-        _this.setState({
-          width: e.bounds.size.width,
-          height: e.bounds.size.height,
-          x: e.bounds.origin.x,
-          y: e.bounds.origin.y,
-          showMask: true
-        });
-      };
-
       _this.onSuccess = function (e) {
         var check = e.data.substring(0, 4);
         console.log('scanned data' + check);
 
         _this.setState({
-          result: e,
-          scan: false,
-          ScanResult: true,
-          showMask: false
+          showMask: true,
+          width: e.bounds.size.width,
+          height: e.bounds.size.height,
+          x: e.bounds.origin.x,
+          y: e.bounds.origin.y
         });
+
+        setTimeout(function () {
+          _this.setState({
+            showMask: false,
+            scan: false,
+            ScanResult: true,
+            result: e
+          });
+        }, 2000);
 
         if (check === 'http') {
           _reactNative.Linking.openURL(e.data).catch(function (err) {
             return console.error('An error occured', err);
-          });
-        } else {
-          _this.setState({
-            result: e,
-            scan: false,
-            ScanResult: true,
-            showMask: false
           });
         }
       };
@@ -95655,7 +95648,6 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
         result: null,
         width: 0,
         height: 0,
-        timePassed: false,
         showMask: false,
         x: 0,
         y: 0
@@ -95664,6 +95656,11 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
     }
 
     (0, _createClass2.default)(CameraScreen, [{
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        clearTimeout(this.state.showMask, this.state.result, this.state.scan, this.state.ScanResult);
+      }
+    }, {
       key: "render",
       value: function render() {
         var _this2 = this;
@@ -95685,12 +95682,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 85
+            lineNumber: 64
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 65
           }
         }, "Welcome To React-Native QR Code App !"), !scan && !ScanResult && _react.default.createElement(_reactNative.Button, {
           title: "Scan me",
@@ -95698,7 +95695,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           onPress: this.activeQR,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 88
+            lineNumber: 67
           }
         }), ScanResult && _react.default.createElement(_reactNative.View, {
           style: {
@@ -95708,67 +95705,72 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 96
+            lineNumber: 75
           }
         }, _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 97
+            lineNumber: 76
           }
         }, "Result !"), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 98
+            lineNumber: 77
           }
         }, "Type:", result.type), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 99
+            lineNumber: 78
           }
         }, "Result:", result.data), _react.default.createElement(_reactNative.Text, {
           numberOfLines: 1,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 100
+            lineNumber: 79
           }
         }, "RawData:", result.rawData), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 102
+            lineNumber: 81
           }
         }, "Width:", width), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 103
+            lineNumber: 82
           }
         }, "Height:", height), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 104
+            lineNumber: 83
           }
         }, "X:", x), _react.default.createElement(_reactNative.Text, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 105
+            lineNumber: 84
           }
-        }, "Y:", y), _react.default.createElement(_reactNative.View, {
-          style: {
-            width: parseInt(width),
-            height: parseInt(height),
-            backgroundColor: 'yellow'
-          },
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 106
-          }
-        }), _react.default.createElement(_reactNative.Button, {
+        }, "Y:", y), _react.default.createElement(_reactNative.Button, {
           onPress: this.scanAgain,
           title: "Click to Scan again!",
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 108
+            lineNumber: 86
           }
-        })), showMask && scan && _react.default.createElement(_reactNativeQrcodeScanner.default, {
+        })), showMask && _react.default.createElement(_reactNative.View, {
+          style: {
+            width: parseInt(width),
+            height: parseInt(height),
+            left: parseInt(x),
+            top: parseInt(y) + parseInt(height) * 2,
+            position: 'absolute',
+            zIndex: 1000,
+            backgroundColor: '#808080',
+            opacity: .4
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 91
+          }
+        }), scan && _react.default.createElement(_reactNativeQrcodeScanner.default, {
           onRead: this.onSuccess,
           reactivate: true,
           showMarker: true,
@@ -95779,7 +95781,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 118
+              lineNumber: 111
             }
           }, "Need camera permission. Go to settings please."),
           ref: function ref(node) {
@@ -95788,7 +95790,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           bottomContent: _react.default.createElement(_reactNative.View, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 121
+              lineNumber: 114
             }
           }, _react.default.createElement(_reactNative.Button, {
             title: "OK. Got it!",
@@ -95797,7 +95799,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 122
+              lineNumber: 115
             }
           }), _react.default.createElement(_reactNative.Button, {
             title: "Stop Scan",
@@ -95808,75 +95810,12 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 126
+              lineNumber: 119
             }
           })),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 113
-          }
-        }, _react.default.createElement(_reactNative.View, {
-          style: {
-            width: parseInt(width),
-            height: parseInt(height),
-            left: parseInt(x),
-            top: parseInt(y),
-            position: 'absolute',
-            zIndex: 1000,
-            backgroundColor: 'yellow'
-          },
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 133
-          }
-        }), "setTimeout(() => ", this.setState({
-          timePassed: true
-        }), ", 2000)z"), scan && _react.default.createElement(_reactNativeQrcodeScanner.default, {
-          onRead: this.showMask,
-          reactivate: true,
-          showMarker: true,
-          fadeIn: false,
-          notAuthorizedView: _react.default.createElement(_reactNative.Text, {
-            style: {
-              alignSelf: 'center'
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 144
-            }
-          }, "Need camera permission. Go to settings please."),
-          ref: function ref(node) {
-            _this2.scanner = node;
-          },
-          bottomContent: _react.default.createElement(_reactNative.View, {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 147
-            }
-          }, _react.default.createElement(_reactNative.Button, {
-            title: "OK. Got it!",
-            onPress: function onPress() {
-              return _this2.scanner.reactivate();
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 148
-            }
-          }), _react.default.createElement(_reactNative.Button, {
-            title: "Stop Scan",
-            onPress: function onPress() {
-              return _this2.setState({
-                scan: false
-              });
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 152
-            }
-          })),
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 139
+            lineNumber: 106
           }
         }));
       }
